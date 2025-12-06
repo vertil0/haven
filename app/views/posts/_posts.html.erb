@@ -1,4 +1,4 @@
-<%= link_to post.datetime.strftime('%B %d, %Y'), post_path(post), :class => "post-date" %>
+<%= link_to post.datetime.strftime('%d.%m.%Y %H:%M'), post_path(post), :class => "post-date" %>
 
 <% if current_user.admin == 1 || (current_user.admin == 2 and post.author == current_user) %>
 <span style="float: right;">
@@ -19,7 +19,7 @@
 
 <% if @settings.comments %>
   <% if post.likes.size > 0 or post.comments.size > 0 %>
-    <h4 class="reactions-header">Reactions</h4>
+    <h4 class="reactions-header">Реакції</h4>
   <% end %>
   <% if post.likes.size > 0 %>
      </p><%= post.like_text %></p>

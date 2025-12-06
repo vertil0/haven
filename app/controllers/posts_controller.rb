@@ -252,17 +252,17 @@ class PostsController < ApplicationController
   end
 
   ### Methods for Import
- 
-  ## TODO, support audio and video in import 
+
+  ## TODO, support audio and video in import
   def parse_img_for_import(line, img_src)
     img_file = "#{line.split("/").last.split("-").first}.jpg"
     i = Image.new
     i.blob.attach(io: File.open(img_src + img_file), filename: img_file)
     i.save
     return process_new_image(i)
-  end  
+  end
 
-  def import_md_file(filename, img_src) 
+  def import_md_file(filename, img_src)
     date = ""
     out = ""
     File.open(filename) do |file|
@@ -283,7 +283,7 @@ class PostsController < ApplicationController
             out += "# #{title}\n"
           elsif line.start_with? "date: "
             d = DateTime.parse(line.split(": ",2).last)
-            date = d.in_time_zone("Pacific Time (US & Canada)").strftime("%Y-%m-%d %H:%M:%S") ##TODO: import with different timezones
+            date = d.in_time_zone("Kyiv").strftime("%Y-%m-%d %H:%M:%S") ##TODO: import with different timezones
           end
         else #not heading
           if line.start_with? "![](http"

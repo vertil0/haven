@@ -283,7 +283,7 @@ class PostsController < ApplicationController
             out += "# #{title}\n"
           elsif line.start_with? "date: "
             d = DateTime.parse(line.split(": ",2).last)
-            date = d.in_time_zone("Kyiv").strftime("%Y-%m-%d %H:%M:%S") ##TODO: import with different timezones
+            date = d.strftime("%Y-%m-%d %H:%M:%S") ##TODO: import with different timezones
           end
         else #not heading
           if line.start_with? "![](http"

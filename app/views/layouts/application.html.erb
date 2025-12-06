@@ -9,7 +9,7 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml" sizes="any" />
     <link rel="apple-touch-icon" href="/apple.png" /><!-- 180×180 -->
     <link rel="manifest" href="/manifest.webmanifest" />
-    
+
     <link rel="indieauth-metadata" href="<%=indie_auth_metadata_url %>" />
     <link rel="authorization_endpoint" href="<%=indie_authorization_endpoint_url %>" />
     <link rel="token_endpoint" href="<%= indie_token_endpoint_url %>" />
@@ -38,17 +38,17 @@
     <input type="checkbox" id="hamburger-toggle" style="display: none;">
     <nav>
     <header>
-      <%=link_to "Home", root_path, class: 'navigation-home' %>
+      <%=link_to "До узбережжя", root_path, class: 'navigation-home' %>
       <label for="hamburger-toggle" class="hamburger-label"></label>
       <div class="nav-links">
         <% if user_signed_in? %>
           <% if current_user.admin == 1 %>
-            <%= link_to "Read", read_path %>
-            <%= link_to "Settings", settings_edit_path(id: 1) %>
-            <%= link_to "Users", users_path %>
+            <%= link_to "Читати", read_path %>
+            <%= link_to "Налаштування", settings_edit_path(id: 1) %>
+            <%= link_to "Користувачі", users_path %>
           <% end %>
-          <%= link_to "Account", edit_user_registration_path %>
-          <%= link_to "Logout", destroy_user_session_path, method: :delete  %>
+          <%= link_to "Профіль", edit_user_registration_path %>
+          <%= link_to "Вийти", destroy_user_session_path, method: :delete  %>
         <% end %>
       </div>
     </header>

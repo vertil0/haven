@@ -1,4 +1,4 @@
-<%= link_to post.datetime.strftime('%d.%m.%Y %H:%M'), post_path(post), :class => "post-date" %>
+<%= link_to post.datetime.strftime('%d.%m.%Y %H:%M %Z'), post_path(post), :class => "post-date" %>
 
 <% if current_user.admin == 1 || (current_user.admin == 2 and post.author == current_user) %>
 <span style="float: right;">

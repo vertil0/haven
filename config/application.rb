@@ -37,7 +37,7 @@ module Blog
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    config.time_zone = "Kyiv"
+    # config.time_zone = "Kyiv"
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end

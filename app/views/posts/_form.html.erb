@@ -47,7 +47,7 @@ function setTime() {
   document.getElementById("post_time").value = timeString;
 }
 function addGicon (event) {
-  if (event.target.classList.contains('gicon')) {
+  if (event.target.classList.contains('gicon_list')) {
     var a = document.createElement('a');
     a.href = event.target.src;
     var gicon = document.createElement("img");

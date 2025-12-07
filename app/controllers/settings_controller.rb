@@ -1,5 +1,5 @@
 class SettingsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except:[:style, :show_fonts]
   before_action :verify_admin, except:[:style, :show_fonts]
 
   def show
@@ -89,7 +89,7 @@ class SettingsController < ApplicationController
     setting = SettingsController.get_setting
     setting.font_hash = setting.fonts.hash.to_s
     setting.save!
-  end 
+  end
 
   # ignore output, throws error on validation issues
   def validate_css(css_string)

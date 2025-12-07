@@ -1,4 +1,12 @@
 <hr>
+<details class="gicons">
+<summary><strong>Іконки</strong></summary>
+<div style="overflow-y: scroll; height: 200px;" id="gicons_list">
+    <% Dir.glob('public/gicon/*.*') do |gicon| %>
+        <img loading="lazy" src="<%= gicon.gsub('public', '') %>" class="gicon_list"></img>
+    <% end %>
+    </div>
+</details>
 <%= form_with model: @post, local: true do |form| %>
   <%= form.date_field :date, :style => 'display:inline;', :value => @post.datetime.strftime("%Y-%m-%d"), type: (@show_date ? :date : :hidden) %>
   <%= form.time_field :time, :style => 'display:inline;', :value => @post.datetime.strftime("%H:%M"), type: (@show_date ? :time : :hidden) %>
@@ -38,6 +46,23 @@ function setTime() {
   document.getElementById("post_date").value = dateString;
   document.getElementById("post_time").value = timeString;
 }
+function addGicon (event) {
+  if (event.target.classList.contains('gicon')) {
+    var a = document.createElement('a');
+    a.href = event.target.src;
+    var gicon = document.createElement("img");
+    gicon.classList.add("gicon");
+    gicon.src = a.pathname;
+    var field = document.getElementById("post_content");
+    var startPos = field.selectionStart;
+    var endPos = field.selectionEnd;
+    field.value = field.value.substring(0, startPos)
+            + gicon.outerHTML
+            + field.value.substring(endPos, field.value.length);
+    doRender();
+  }
+}
+document.querySelector('#gicons_list').addEventListener('click', addGicon)
 if (document.getElementById("post_content").value.trim()=="") {
   setTime();
 }

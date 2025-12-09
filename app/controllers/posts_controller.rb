@@ -7,8 +7,8 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.order(datetime: :desc).page(params[:page])
-    recent_comments = Comment.where('created_at >= ?', 1.week.ago).order(created_at: :desc).to_a
-    recent_likes = Like.where('created_at >= ?', 1.week.ago).order(created_at: :desc).to_a
+    recent_comments = Comment.where('created_at >= ?', 1.week.ago).where('author_id != ?', current_user.id).order(created_at: :desc).to_a
+    recent_likes = Like.where('created_at >= ?', 1.week.ago).where('user_id != ?', current_user.id).order(created_at: :desc).to_a
     @recent_comments_and_likes = []
     while recent_comments.size > 0 or recent_likes.size > 0
       if recent_comments.size == 0

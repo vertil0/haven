@@ -102,7 +102,7 @@ class PostsController < ApplicationController
   end
 
   def self.sanitize(txt)
-    txt.gsub(/[^0-9A-Za-zА-Яа-яЇїІіҐґ]/, '-').squeeze("-")
+    txt.gsub(/[^0-9A-Za-zА-Яа-яЇїІіҐґЄє]/, '-').squeeze("-")
   end
 
   def self.strip_image(txt)

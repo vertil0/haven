@@ -25,7 +25,7 @@
      </p><%= post.like_text %></p>
   <% end %>
   <% post.comments.each do |comment| %>
-    <small><%=comment.author.name%>: </small> <%= comment.body %>
+    <small data-name="<%=comment.author.name%>"><%=comment.author.name%>: </small> <%= comment.body %>
     <% if current_user.admin == 1 || (current_user.admin == 2 and post.author == current_user) %>
       <span style="float: right;">
       <%= link_to 'Delete', destroy_comment_path(comment),

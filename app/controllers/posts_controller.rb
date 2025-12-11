@@ -163,9 +163,9 @@ class PostsController < ApplicationController
     blob_path = path_for(image.blob)
     image_meta = ActiveStorage::Analyzer::ImageAnalyzer::ImageMagick.new(image.blob).metadata
     if image_meta[:width] > 1600 #resize at lower quality with link
-      return "\n\n<a href=\"#{image_path(image)}\">\n  <img src=\"#{image_resized_path(image)}\"></img>\n</a>"
+      return "<a href=\"#{image_path(image)}\"><img src=\"#{image_resized_path(image)}\"></img></a>"
     else #simple full image
-      return "\n\n<img src=\"#{image_path(image)}\"></img>"
+      return "<img src=\"#{image_path(image)}\"></img>"
     end
   end
 

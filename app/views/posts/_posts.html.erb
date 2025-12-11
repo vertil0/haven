@@ -1,11 +1,15 @@
 <%= link_to post.datetime.strftime('%d.%m.%Y %H:%M'), post_path(post), :class => "post-date" %>
 
 <% if current_user.admin == 1 || (current_user.admin == 2 and post.author == current_user) %>
-<span style="float: right;">
-<%= link_to 'Edit', edit_post_path(post) %>
-<%= link_to 'Delete', post_path(post),
+<span style="float: right;" class="img_link">
+<%= link_to edit_post_path(post) do %>
+  <img src="/pencil.png"/>
+  <% end %>
+<%= link_to  post_path(post),
               method: :delete,
-              data: { confirm: 'Are you sure?' } %>
+              data: { confirm: 'Are you sure?' } do %>
+                <img src="/cross.png"/>
+                <% end %>
 </span>
 <% end %>
 
@@ -27,10 +31,10 @@
   <% post.comments.each do |comment| %>
     <small data-name="<%=comment.author.name%>"><abbr title="<%=comment.created_at.strftime('%d.%m.%Y %H:%M')%>"><%=comment.author.name%></abbr>: </small> <%= comment.body %>
     <% if current_user.admin == 1 || (current_user.admin == 2 and post.author == current_user) %>
-      <span style="float: right;">
-      <%= link_to 'Delete', destroy_comment_path(comment),
+      <span style="float: right;" class="img_link">
+      <%= link_to  destroy_comment_path(comment),
                     method: :delete,
-                    data: { confirm: 'Are you sure you want to delete this comment?' } %>
+                    data: { confirm: 'Are you sure you want to delete this comment?' } do %><img src="/cross.png"/><% end %>
       </span>
     <% end %>
     <br/>

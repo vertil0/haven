@@ -238,7 +238,10 @@ class PostsController < ApplicationController
     end
     date = params[:post][:date]
     time = params[:post][:time]
-    post.datetime = DateTime.parse("#{date} #{time}")
+    post.datetime = "#{date} #{time}".in_time_zone(Time.zone.name)
+    # if !post.datetime?
+    #   post.datetime = DateTime.now
+    # end
     post.content = params[:post][:content]
     post.author = current_user unless !!post.author
     post

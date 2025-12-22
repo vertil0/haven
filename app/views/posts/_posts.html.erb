@@ -42,15 +42,17 @@
   <br<%= show_page ? raw(' id="comment_form"') : raw(" id=\"comment_form_#{post.id}\"") %>/>
   <div>
     <% if (post.likes_from current_user).size > 0 %>
-      <%= link_to raw("<button>You liked this</button>"), destroy_like_path(post.likes_from(current_user).first), method: :delete %>
+      <%= link_to raw("<button>Прибрати реакцію</button>"), destroy_like_path(post.likes_from(current_user).first), method: :delete %>
     <% else %>
       <%= form_tag("/posts/#{post.id}/likes", method: "post", class: "comments") do %>
-        <%= submit_tag("👍 Like") %>
+        <%= submit_tag("⭐") %>
+        <%= submit_tag("❄️") %>
+        <%= submit_tag("💅") %>
       <% end %>
     <% end %>
     <%= form_tag("/posts/#{post.id}/comments", method: "post", class: "comments") do %>
-      <%= text_field_tag(:comment_body, nil, {placeholder: "Write a comment..."}) %>
-      <%= submit_tag("Post Comment") %>
+      <%= text_field_tag(:comment_body, nil, {placeholder: Напишіть коменат..."}) %>
+      <%= submit_tag("Відправити") %>
     <% end %>
   </div>
 <% end %>

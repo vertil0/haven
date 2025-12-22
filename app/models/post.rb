@@ -16,7 +16,7 @@ class Post < ApplicationRecord
     text = ""
     reactions.each do |reaction, names|
       text << "\n" unless text == ""
-      text << "#{reaction} from"
+      text << "#{reaction} від"
       names.each do |name|
         text << " #{name},"
       end

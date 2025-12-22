@@ -46,12 +46,13 @@
     <% else %>
       <%= form_tag("/posts/#{post.id}/likes", method: "post", class: "comments") do %>
         <%= submit_tag("⭐") %>
-        <%= submit_tag("❄️") %>
         <%= submit_tag("💅") %>
+        <%= submit_tag("😔") %>
+        <%= submit_tag("💢") %>
       <% end %>
     <% end %>
     <%= form_tag("/posts/#{post.id}/comments", method: "post", class: "comments") do %>
-      <%= text_field_tag(:comment_body, nil, {placeholder: Напишіть коменат..."}) %>
+      <%= text_field_tag(:comment_body, nil, {placeholder: "Напишіть коментар..."}) %>
       <%= submit_tag("Відправити") %>
     <% end %>
   </div>

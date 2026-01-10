@@ -195,7 +195,7 @@ class PostsController < ApplicationController
 
   def handle_form_submit(params, view)
     @post = post_from_form(params)
-    if params[:commit] == "Upload Selected Image"
+    if params[:commit] == "Завантажити медіа"
       if !(params[:post][:pic].nil?)
         begin
           @image = Image.new

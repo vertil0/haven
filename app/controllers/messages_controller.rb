@@ -9,12 +9,13 @@ class MessagesController < ApplicationController
 
   def show
     @message = Message.find(params[:id])
-    if @message.author != current_user  || @message.reciever != current_user
+    if @message.author == current_user  || @message.reciever == current_user
+      if @message.reciever == current_user
+        @message.read = DateTime.now
+        @message.save
+      end
+    else
       redirect_to :messages
-    end
-    if @message.reciever == current_user
-      @message.read = DateTime.now
-      @message.save
     end
   end
 

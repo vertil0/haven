@@ -1,0 +1,16 @@
+<%
+=begin%>
+ <%= link_to message.sent.strftime('%d.%m.%Y %H:%M'), message_path(message), :class => "post-date" %> 
+<%
+=end%>
+
+<div class="message-content"> 
+<div class="message-author">˗ˏˋ <%= message.author.name %> ´ˎ˗</div>
+</br>
+<div dir="auto">
+<%= CommonMarker.render_html(message.content, [:UNSAFE, :HARDBREAKS], PostsController::GFM_EXT).html_safe %>
+</div>
+<div class="message-date">ੈ✩‧₊˚<%= message.sent.strftime('%d.%m.%Y %H:%M') %></div>
+
+</div>
+<div><%= link_to "↻ Відповісти", new_message_path(:id => message.author.id) %></div>

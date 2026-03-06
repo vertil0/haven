@@ -14,6 +14,9 @@ class User < ApplicationRecord
   has_many :indie_auth_requests, dependent: :destroy
   has_many :indie_auth_tokens, dependent: :destroy
 
+  has_many :author, class_name: 'Message', foreign_key: 'author_id'
+  has_many :reciever, class_name: 'Message', foreign_key: 'reciever_id'
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

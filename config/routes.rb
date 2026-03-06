@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  resources :messages
+  get '/messages/:id/answer', to: 'messages#answer'
+  # get "/messages", to: "message#index"
+  # get "/message/new", to: "message#new"
+  # post "/messages", to: "message#create"
+  # get "/message/:id", to: "message#show"
+  # delete "/message/:id", to: "message#destroy"
+
   get 'indieauth/metadata', to: 'indieauth#metadata', as: "indie_auth_metadata"
   get 'indieauth/authorization', to: 'indieauth#authorization', as: "indie_authorization_endpoint"
   post 'indieauth/authorization', to: 'indieauth#profile', as: "indie_auth_profile"

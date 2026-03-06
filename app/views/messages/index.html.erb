@@ -1,0 +1,25 @@
+<h1>Повідомлення</h1>
+<p><%= link_to raw("<button type=\"button\" id=\"New Message\">Нове повідомлення</button>"), new_message_path %>
+
+<% if @new_messages.count > 0 %>
+  <h2>Нові повідомлення</h2>
+<% end %>
+<div id="new_messages">
+<ul>
+  <% @new_messages.each do |message| %>
+    <li>
+      <%= link_to message.author.name, message_path(message.id) %>
+    </li>
+  <% end %>
+  </ul>
+</div>
+<h2>Вхідні</h2>
+<div id="messages">
+<ul>
+  <% @messages.each do |message| %>
+    <li>
+      <%= link_to message.sent.strftime('%d.%m.%Y %H:%M'), message_path(message.id) %> від <%= link_to message.author.name, new_message_path(:id => message.author.id) %>
+    </li>
+  <% end %>
+  </ul>
+</div>

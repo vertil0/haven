@@ -41,12 +41,21 @@
       <div class="nav-links">
         <% if user_signed_in? %>
           <% if current_user.admin == 1 %>
-            <%= link_to "Читати", read_path %>
-            <%= link_to "Налаштування", settings_edit_path(id: 1) %>
-            <%= link_to "Користувачі", users_path %>
+            <%
+=begin%>
+ <%= link_to "Читати", read_path %> 
+<%
+=end%>
+            <%= link_to raw("<img loading=\"lazy\" src=\"/img/Gear.png\" class=\"gicon_list\"></img>"), settings_edit_path(id: 1) %>
+            <%= link_to raw("<img loading=\"lazy\" src=\"/img/People-Crossed.png\" class=\"gicon_list\"></img>"), users_path %>
           <% end %>
-          <%= link_to "Профіль", edit_user_registration_path %>
-          <%= link_to "Вийти", destroy_user_session_path, method: :delete  %>
+          <% if Message.where('read IS NULL').count > 0 %>
+            <%= link_to raw("<img loading=\"lazy\" src=\"/img/Message-Exclamation.png\" class=\"gicon_list\"></img>"), messages_path %>
+          <% else %>
+            <%= link_to raw("<img loading=\"lazy\" src=\"/img/Message.png\" class=\"gicon_list\"></img>"), messages_path %>
+          <% end %>
+          <%= link_to raw("<img loading=\"lazy\" src=\"/img/People.png\" class=\"gicon_list\"></img>"), edit_user_registration_path %>
+          <%= link_to raw("<img loading=\"lazy\" src=\"/img/Power.png\" class=\"gicon_list\"></img>"), destroy_user_session_path, method: :delete  %>
         <% end %>
       </div>
     </header>

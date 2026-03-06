@@ -3,8 +3,8 @@ class MessagesController < ApplicationController
 
   def index
     # @messages = Message.where('author_id != ?', current_user.id).order(sent: :desc)
-    @messages = Message.where('read IS NOT NULL').order(sent: :desc)
-    @new_messages = Message.where('read IS NULL').order(sent: :desc)
+    @messages = Message.where('author_id != ?', current_user.id).where('read IS NOT NULL').order(sent: :desc)
+    @new_messages = Message.where('author_id != ?', current_user.id).where('read IS NULL').order(sent: :desc)
   end
 
   def show

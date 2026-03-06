@@ -8,7 +8,7 @@
 <ul>
   <% @new_messages.each do |message| %>
     <li>
-      <%= link_to message.author.name, message_path(message.id) %>
+       <%= link_to message.sent.strftime('%d.%m.%Y %H:%M'), message_path(message.id) %> від <%= link_to message.author.name, new_message_path(:id => message.author.id) %>
     </li>
   <% end %>
   </ul>

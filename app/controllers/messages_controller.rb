@@ -5,6 +5,7 @@ class MessagesController < ApplicationController
     # @messages = Message.where('author_id != ?', current_user.id).order(sent: :desc)
     @messages = Message.where('reciever_id = ?', current_user.id).where('read IS NOT NULL').order(sent: :desc)
     @new_messages = Message.where('reciever_id = ?', current_user.id).where('read IS NULL').order(sent: :desc)
+    @sent_messages = Message.where('author_id = ?', current_user.id).order(sent: :desc)
   end
 
   def show

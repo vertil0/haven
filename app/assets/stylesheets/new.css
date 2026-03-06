@@ -505,4 +505,5 @@ audio {
 .message-content {
 	border: 1px var(--nc-lk-1) solid;
   padding: 10px;
+  margin: 10px;
 }

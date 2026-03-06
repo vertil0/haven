@@ -23,3 +23,13 @@
   <% end %>
   </ul>
 </div>
+<h2>Вихідні</h2>
+<div id="messages">
+<ul>
+  <% @sent_messages.each do |message| %>
+    <li>
+      <%= link_to message.sent.strftime('%d.%m.%Y %H:%M'), message_path(message.id) %> до <%= link_to message.reciever.name, new_message_path(:id => message.reciever.id) %>
+    </li>
+  <% end %>
+  </ul>
+</div>

@@ -1,5 +1,5 @@
 
-<div class="message-content"> 
+<div class="message-content<% if message.author.id == current_user.id %> my-message<% end %>"> 
 <div class="message-author">˗ˏˋ <%= message.author.name %> ´ˎ˗</div>
 </br>
 <div dir="auto">

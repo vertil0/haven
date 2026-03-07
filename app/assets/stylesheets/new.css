@@ -503,7 +503,11 @@ audio {
 	font-weight: bold;
 }
 .message-content {
-	border: 1px var(--nc-lk-1) solid;
+	border: 2px var(--nc-lk-1) solid;
   padding: 10px;
   margin: 10px;
+}
+
+.message-content.my-message{
+	border: 2px var(--nc-lk-2) dotted;
 }

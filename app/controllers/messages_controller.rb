@@ -2,10 +2,8 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # @messages = Message.where('author_id != ?', current_user.id).order(sent: :desc)
-    @messages = Message.where('reciever_id = ?', current_user.id).where('read IS NOT NULL').order(sent: :desc)
     @new_messages = Message.where('reciever_id = ?', current_user.id).where('read IS NULL').order(sent: :desc)
-    @sent_messages = Message.where('author_id = ?', current_user.id).order(sent: :desc)
+    @friends = Message.where('reciever_id = ?', current_user.id).select("author_id, count(*)-count(read) as i").group("author_id")
   end
 
   def show
@@ -31,6 +29,28 @@ class MessagesController < ApplicationController
   
   def create
     handle_form_submit(params, 'new')
+  end
+
+  def dm
+     @message = Message.new
+     @message.reciever = User.find(params[:id])
+     @messages = Message.where('reciever_id = ? OR author_id = ?', current_user.id, current_user.id).where('reciever_id = ? OR author_id = ?', params[:id], params[:id]).order(sent: :desc).page(params[:page])
+     Message.where('reciever_id = ?', current_user.id).update_all(:read => DateTime.now)
+  end
+
+  def dm_create
+    @messages = Message.where('reciever_id = ? OR author_id = ?', current_user.id, current_user.id).where('reciever_id = ? OR author_id = ?', params[:id], params[:id]).order(sent: :desc).page(params[:page])
+    handle_form_submit(params, 'dm')
+  end
+
+  def dm_search
+    u = User.find_by(name: params[:username])
+    if u == nil
+      flash.now[:alert] = "You did not choose a file to upload"
+      redirect_to :messages
+    else
+      redirect_to dm_path(:id => u.id)
+    end
   end
 
   def process_new_video(image) ## Image model used for all media
@@ -96,28 +116,19 @@ class MessagesController < ApplicationController
       else # attachment does not exist
         flash.now[:alert] = "You did not choose a file to upload"
       end
-      render view
+      render :dm, id: params[:id]
     else
-      u = User.find_by(name: params[:message][:reciever].strip)
-      if u.nil?
-        flash[:alert] = "Такого користувача не існує"
-        render view
-      else
-        @message.save
-        redirect_to @message
-      end
+      @message.save
+      redirect_to :dm, id: params[:id]
     end
   end
 
   def message_from_form(params)
-    message = Message.find_by(id: params[:id]) || Message.new
+    message = Message.new
     message.sent = DateTime.now
     message.content = params[:message][:content]
     message.author = current_user
-    u = User.find_by(name: params[:message][:reciever])
-    unless u.nil?
-      message.reciever = u
-    end
+    message.reciever = User.find(params[:id])
     message
   end
   

@@ -6,30 +6,28 @@
 <% end %>
 <div id="new_messages">
 <ul>
-  <% @new_messages.each do |message| %>
+  <% @friends.each do |friend| %>
+  <% if friend.i > 0 %>
     <li>
-       <%= link_to message.sent.strftime('%d.%m.%Y %H:%M'), message_path(message.id) %> від <%= link_to message.author.name, new_message_path(:id => message.author.id) %>
+      <%= link_to friend.author.name, dm_path(:id => friend.author.id) %> - <%= friend.i %> нових повідомлень
     </li>
+    <% end %>
   <% end %>
   </ul>
 </div>
+<hr>
 <h2>Вхідні</h2>
 <div id="messages">
 <ul>
-  <% @messages.each do |message| %>
+  <% @friends.each do |friend| %>
     <li>
-      <%= link_to message.sent.strftime('%d.%m.%Y %H:%M'), message_path(message.id) %> від <%= link_to message.author.name, new_message_path(:id => message.author.id) %>
+      <%= link_to friend.author.name, dm_path(:id => friend.author.id) %>
     </li>
   <% end %>
   </ul>
 </div>
-<h2>Вихідні</h2>
-<div id="messages">
-<ul>
-  <% @sent_messages.each do |message| %>
-    <li>
-      <%= link_to message.sent.strftime('%d.%m.%Y %H:%M'), message_path(message.id) %> до <%= link_to message.reciever.name, new_message_path(:id => message.reciever.id) %>
-    </li>
-  <% end %>
-  </ul>
-</div>
+<h2>Пошук друга</h2>
+<%= form_with(url: '/search_user', method: 'post', local: true) do |f| %>
+  <%= f.text_field :username, placeholder: "Ім'я користувача..." %>
+  <%= f.submit("Пошук") %>
+<% end %>

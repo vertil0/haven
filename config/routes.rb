@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
+  get '/messages/user/:id', to: 'messages#dm', as: "dm"
+  post '/messages/user/:id', to: 'messages#dm_create'
   resources :messages
   get '/messages/:id/answer', to: 'messages#answer'
+  post '/search_user', to: 'messages#dm_search'
   # get "/messages", to: "message#index"
   # get "/message/new", to: "message#new"
   # post "/messages", to: "message#create"

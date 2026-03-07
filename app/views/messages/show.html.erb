@@ -1,2 +1,5 @@
 <%= link_to 'Повернутися', messages_path %>
 <%= render "message", message: @message, show_page: true  %>
+<% if @message.author != current_user %>
+<div><%= link_to "↻ Відповісти", new_message_path(:id => message.author.id) %></div>
+<% end %>

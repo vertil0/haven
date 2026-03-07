@@ -28,6 +28,6 @@
 </div>
 <h2>Пошук друга</h2>
 <%= form_with(url: '/search_user', method: 'post', local: true) do |f| %>
-  <%= f.text_field :username, placeholder: "Ім'я користувача..." %>
+  <%= f.text_field :search_name, placeholder: "Ім'я користувача..." %>
   <%= f.submit("Пошук") %>
 <% end %>

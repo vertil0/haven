@@ -44,7 +44,7 @@ class MessagesController < ApplicationController
   end
 
   def dm_search
-    u = User.find_by(name: params[:username])
+    u = User.find_by(name: params[:search_name])
     if u == nil
       flash.now[:alert] = "You did not choose a file to upload"
       redirect_to :messages

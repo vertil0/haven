@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
 
   def index
     @new_messages = Message.where('reciever_id = ?', current_user.id).where('read IS NULL').order(sent: :desc)
-    @friends = Message.where('reciever_id = ?', current_user.id).select("author_id, count(*)-count(read) as i").group("author_id")
+    @friends = Message.where('reciever_id = ?', current_user.id).select("author_id, count(*)-count(read) as i").group("author_id").order(sent: :desc)
   end
 
   def show

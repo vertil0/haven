@@ -67,7 +67,9 @@
     <% if alert and !alert.empty? %>
       <p class="alert"><%= alert %><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span></p>
     <% end %>
-
+    <% if Message.where('reciever_id = ?', current_user.id).where('read IS NULL').count > 0 %>
+       <p class="notice"><img class="gicon" src="/gicon/1636.gif"> <%= link_to raw("У вас є непрочитані повідомлення<span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>"), messages_path %></p>
+    <% end %>
     <% if !!@settings %>
       <% if !!@settings.title && !@settings.title.empty? %>
         <h1 class="title"><%=@settings.title%></h1>

@@ -41,11 +41,6 @@
       <div class="nav-links">
         <% if user_signed_in? %>
           <% if current_user.admin == 1 %>
-            <%
-=begin%>
- <%= link_to "Читати", read_path %> 
-<%
-=end%>
             <%= link_to raw("<img loading=\"lazy\" src=\"/img/Gear.png\" class=\"gicon_list\"></img>"), settings_edit_path(id: 1) %>
             <%= link_to raw("<img loading=\"lazy\" src=\"/img/People-Crossed.png\" class=\"gicon_list\"></img>"), users_path %>
           <% end %>
@@ -67,8 +62,10 @@
     <% if alert and !alert.empty? %>
       <p class="alert"><%= alert %><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span></p>
     <% end %>
-    <% if Message.where('reciever_id = ?', current_user.id).where('read IS NULL').count > 0 %>
-       <p class="notice"><img class="gicon" src="/gicon/1636.gif"> <%= link_to raw("У вас є непрочитані повідомлення<span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>"), messages_path %></p>
+    <% if user_signed_in? %>
+      <% if Message.where('reciever_id = ?', current_user.id).where('read IS NULL').count > 0 %>
+          <p class="notice"><img class="gicon" src="/gicon/1636.gif"> <%= link_to raw("У вас є непрочитані повідомлення<span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>"), messages_path %></p>
+      <% end %>
     <% end %>
     <% if !!@settings %>
       <% if !!@settings.title && !@settings.title.empty? %>

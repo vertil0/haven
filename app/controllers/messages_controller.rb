@@ -68,7 +68,7 @@ class MessagesController < ApplicationController
   def process_new_image(image)
     blob_path = path_for(image.blob)
     image_meta = ActiveStorage::Analyzer::ImageAnalyzer::ImageMagick.new(image.blob).metadata
-    if image_meta[:width] > 1600 #resize at lower quality with link
+    if image_meta[:width] > 800 #resize at lower quality with link
       return "<a href=\"#{image_path(image)}\"><img src=\"#{image_resized_path(image)}\"></img></a>"
     else #simple full image
       return "<img src=\"#{image_path(image)}\"></img>"

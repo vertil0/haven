@@ -14,7 +14,7 @@
 <% end %>
 
 <% if @settings.byline %>
-<div class="post-author"><%= post.author.name %></div>
+<div class="post-author"><%=post.author.name%> <%= link_to raw("<img loading=\"lazy\" src=\"/gicon/1636.gif\" class=\"gicon_list\"></img>"), dm_path(:id => post.author.id) %></div>
 <% end %>
 
 <div dir="auto">

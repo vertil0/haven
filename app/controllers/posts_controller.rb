@@ -236,12 +236,13 @@ class PostsController < ApplicationController
     unless post.id.nil?
       verify_can_modify_post(post)
     end
-    date = params[:post][:date]
-    time = params[:post][:time]
-    post.datetime = "#{date} #{time}".in_time_zone(Time.zone.name)
-    # if !post.datetime?
-    #   post.datetime = DateTime.now
-    # end
+    # date = params[:post][:date]
+    # time = params[:post][:time]
+    # post.datetime = "#{date} #{time}".in_time_zone(Time.zone.name)
+    if !post.datetime?
+      post.datetime = DateTime.now
+    end
+    # post.datetime = DateTime.now
     post.content = params[:post][:content]
     post.author = current_user unless !!post.author
     post
